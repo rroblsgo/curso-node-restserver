@@ -32,6 +32,16 @@ const existeCategoriaPorId = async (id) => {
   }
 };
 
+const coleccionesPermitidas = (coleccion = "", colecciones = []) => {
+  const incluida = colecciones.includes(coleccion);
+  if (!incluida) {
+    throw new Error(
+      `La coleccion ${coleccion} no es permitida, ${colecciones}`
+    );
+  }
+  return true;
+};
+
 const existeProductoPorId = async (id) => {
   // Verificar si el producto existe
   const existeProducto = await Producto.findById(id);
@@ -46,4 +56,5 @@ module.exports = {
   existeUsuarioPorId,
   existeCategoriaPorId,
   existeProductoPorId,
+  coleccionesPermitidas,
 };
